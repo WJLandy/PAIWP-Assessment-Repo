@@ -26,17 +26,24 @@ categorical_features = ['gender', 'Partner', 'Dependents', 'PhoneService', 'Mult
                         'InternetService', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 
                         'TechSupport', 'StreamingTV', 'StreamingMovies', 'Contract', 
                         'PaperlessBilling', 'PaymentMethod']
-data = pd.get_dummies(data, columns=categorical_features, drop_first=True)
 
-# Convert all columns to numeric
-data = data.apply(pd.to_numeric, errors='coerce')
+# Verify that 'Churn' is still 'Yes'/'No' before transformation
+print("Churn column before transformation:")
+print(data['Churn'].unique())
 
-# Verify the target variable transformation
+# Convert 'Churn' column to numeric values
 data['Churn'] = data['Churn'].apply(lambda x: 1 if x == 'Yes' else 0)
 
-# Check the distribution of the target variable after transformation
+# Verify the target variable transformation
 print("Transformed Churn distribution:")
 print(data['Churn'].value_counts())
+
+# Apply one-hot encoding to categorical features
+data = pd.get_dummies(data, columns=categorical_features, drop_first=True)
+
+# Verify data after encoding
+print("Data after encoding:")
+print(data.head())
 
 # Splitting the data with stratified sampling
 X = data.drop(['customerID', 'Churn'], axis=1)  # Features
