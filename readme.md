@@ -9,7 +9,7 @@ Included .csv file details
 
 Included .py file details
     run_1st_data_cleaning.py
-        First file to run to clean the input data and output as a new file "cleaned_data.csv"
+        First file to run to clean the input data contained in "Customer_Churn.csv" and output as a new file "cleaned_data.csv"
 
     run_2nd_modeling.py
         Second file to run that takes the data inside "cleaned_data.csv" and builds the "model.pkl" and "scaler.pkl" files
