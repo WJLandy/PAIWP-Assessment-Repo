@@ -2,7 +2,7 @@ import pandas as pd
 import joblib
 import shap
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
 
 # Load the saved model and scaler
 model = joblib.load('model.pkl')
@@ -55,8 +55,18 @@ shap_df['Churn_Probability'] = predictions_proba
 new_data['Churn_Prediction'] = predictions
 new_data['Churn_Probability'] = predictions_proba
 
-# Save the predictions and SHAP values to new CSV files
-new_data.to_csv('predictions.csv', index=False)
+# Save the predictions and SHAP values to a new CSV file
+new_data.to_csv('predictions_with_shap.csv', index=False)
 shap_df.to_csv('shap_values.csv', index=False)
+
+# Visualize SHAP values
+shap.initjs()
+
+# Force plot for the first prediction
+force_plot = shap.force_plot(explainer.expected_value[1], shap_values[0].values, new_data.iloc[0], matplotlib=True)
+plt.savefig('force_plot.png')
+
+# Summary plot for all predictions
+shap.summary_plot(shap_values, new_data)
 
 print(new_data[['Churn_Prediction', 'Churn_Probability']])
