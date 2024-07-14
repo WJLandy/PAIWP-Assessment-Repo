@@ -1,7 +1,8 @@
 Repo for PAIWP assessment
 
 Required libraries detailed in the "requirements.txt"
-To automatically install use the command "pip install -r requirements.txt"
+    
+    To automatically install use the command "pip install -r requirements.txt"
 
 
 Included .csv file details
