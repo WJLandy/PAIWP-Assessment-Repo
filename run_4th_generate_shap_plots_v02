@@ -19,9 +19,15 @@ for i in range(len(data)):
     shap_values = row.filter(like='SHAP_')
     shap_values = shap_values.abs().sort_values(ascending=False).head(top_features)
     
+    # Prepare data for plotting
+    plot_data = pd.DataFrame({
+        'Feature': shap_values.index.str.replace('SHAP_', ''),
+        'SHAP Value': shap_values.values
+    })
+    
     # Create a bar plot for the SHAP values
-    plt.figure(figsize=(10, 6))
-    sns.barplot(x=shap_values.values, y=shap_values.index.str.replace('SHAP_', ''), palette='viridis')
+    plt.figure(figsize=(20, 6))
+    sns.barplot(x='SHAP Value', y='Feature', data=plot_data, palette='viridis', hue='Feature', dodge=False, legend=False)
     
     plt.title(f'Feature Impact on Churn Prediction for Customer {i + 1}')
     plt.xlabel('SHAP Value (Impact on Model Output)')
