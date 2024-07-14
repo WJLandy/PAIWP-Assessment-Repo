@@ -1,6 +1,11 @@
 Repo for PAIWP assessment
 
+Required libraries detailed in the "requirements.txt"
+To automatically install use the command "pip install -r requirements.txt"
+
+
 Included .csv file details
+
     Customer_Churn.csv
         churn data used for model training
 
@@ -8,6 +13,7 @@ Included .csv file details
         30 records separated from the initial training set, this is intended to mimic live data inputs that predictions are required for
 
 Included .py file details
+
     run_1st_data_cleaning.py
         First file to run to clean the input data contained in "Customer_Churn.csv" and output as a new file "cleaned_data.csv"
 
